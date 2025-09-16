@@ -13,14 +13,14 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y mongodb-mongosh mongodb-org-tools
 
 # Install Go and Go MongoDB drivers
+ARG TARGETARCH
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && curl -OL https://dl.google.com/go/go1.19.2.linux-amd64.tar.gz \
-    && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.2.linux-amd64.tar.gz \
-    && rm go1.19.2.linux-amd64.tar.gz \
+    && curl -OL https://dl.google.com/go/go1.24.2.linux-${TARGETARCH}.tar.gz \
+    && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.2.linux-${TARGETARCH}.tar.gz \
+    && rm go1.24.2.linux-${TARGETARCH}.tar.gz \
     && export GOROOT=/usr/local/go \
-    && export GOPATH=/workspace/lessions/5.4 \
+    && export GOPATH=/workspace/lessons/5.4 \
     && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
-    #&& cd /workspaces/introduction-to-mongodb-4315215/lessons/5.4 && go get go.mongodb.org/mongo-driver/mongo \
     && go install -v golang.org/x/tools/gopls@latest
 
 #golang-gopkg-mgo.v2-dev
